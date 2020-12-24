@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.mapper.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.entity.Comment" >
+    <id column="commentId" property="commentid" jdbcType="BIGINT" />
+    <result column="goodsId" property="goodsid" jdbcType="BIGINT" />
+    <result column="userId" property="userid" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="star" property="star" jdbcType="INTEGER" />
+    <result column="lastId" property="lastid" jdbcType="BIGINT" />
+    <result column="imag0" property="imag0" jdbcType="VARCHAR" />
+    <result column="imag1" property="imag1" jdbcType="VARCHAR" />
+    <result column="imag2" property="imag2" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    commentId, goodsId, userId, content, star, lastId, imag0, imag1, imag2, createTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where commentId = #{commentid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from comment
+    where commentId = #{commentid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.entity.Comment" >
+    insert into comment (commentId, goodsId, userId, 
+      content, star, lastId, 
+      imag0, imag1, imag2, 
+      createTime)
+    values (#{commentid,jdbcType=BIGINT}, #{goodsid,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, 
+      #{content,jdbcType=VARCHAR}, #{star,jdbcType=INTEGER}, #{lastid,jdbcType=BIGINT}, 
+      #{imag0,jdbcType=VARCHAR}, #{imag1,jdbcType=VARCHAR}, #{imag2,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.entity.Comment" >
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentid != null" >
+        commentId,
+      </if>
+      <if test="goodsid != null" >
+        goodsId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="star != null" >
+        star,
+      </if>
+      <if test="lastid != null" >
+        lastId,
+      </if>
+      <if test="imag0 != null" >
+        imag0,
+      </if>
+      <if test="imag1 != null" >
+        imag1,
+      </if>
+      <if test="imag2 != null" >
+        imag2,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentid != null" >
+        #{commentid,jdbcType=BIGINT},
+      </if>
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="star != null" >
+        #{star,jdbcType=INTEGER},
+      </if>
+      <if test="lastid != null" >
+        #{lastid,jdbcType=BIGINT},
+      </if>
+      <if test="imag0 != null" >
+        #{imag0,jdbcType=VARCHAR},
+      </if>
+      <if test="imag1 != null" >
+        #{imag1,jdbcType=VARCHAR},
+      </if>
+      <if test="imag2 != null" >
+        #{imag2,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.entity.Comment" >
+    update comment
+    <set >
+      <if test="goodsid != null" >
+        goodsId = #{goodsid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="star != null" >
+        star = #{star,jdbcType=INTEGER},
+      </if>
+      <if test="lastid != null" >
+        lastId = #{lastid,jdbcType=BIGINT},
+      </if>
+      <if test="imag0 != null" >
+        imag0 = #{imag0,jdbcType=VARCHAR},
+      </if>
+      <if test="imag1 != null" >
+        imag1 = #{imag1,jdbcType=VARCHAR},
+      </if>
+      <if test="imag2 != null" >
+        imag2 = #{imag2,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where commentId = #{commentid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.entity.Comment" >
+    update comment
+    set goodsId = #{goodsid,jdbcType=BIGINT},
+      userId = #{userid,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      star = #{star,jdbcType=INTEGER},
+      lastId = #{lastid,jdbcType=BIGINT},
+      imag0 = #{imag0,jdbcType=VARCHAR},
+      imag1 = #{imag1,jdbcType=VARCHAR},
+      imag2 = #{imag2,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where commentId = #{commentid,jdbcType=BIGINT}
+  </update>
+
+  <!--查询商品评论列表-->
+  <select id="findCommentList" parameterType="long" resultMap="BaseResultMap">
+    select * from comment where goodsId = #{goodsid} and lastId=0 order by createTime desc
+  </select>
+
+  <!--查询评论个数-->
+  <select id="findCommentCount"  resultType="int" >
+    select count(*) from comment where userId = #{userid} and goodsId = #{goodsid} and lastId = #{lastid}
+  </select>
+
+  <!--查询追评列表-->
+  <select id="findAgainList" resultMap="BaseResultMap">
+    select * from comment where goodsId = #{goodsid} and lastId=#{lastid} order by createTime desc
+  </select>
+
+  <!--删除评论时自动删除追评-->
+  <delete id="deleteAgain" parameterType="long">
+    delete from comment
+    where lastId = #{lastid}<!--评论的commentid-->
+  </delete>
+
+  <select id="findRecommendId" resultType="long">
+    select goodsId from comment group by goodsId order by count(star) desc
+  </select>
+
+  <select id="findFiveStar" parameterType="long" resultType="long">
+    select count(1) from comment where goodsid = #{goodsId} and star = 5
+  </select>
+
+  <select id="findTotal" parameterType="long" resultType="long">
+    select count(1) from comment where goodsid = #{goodsId}
+  </select>
+</mapper>

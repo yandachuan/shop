@@ -1,0 +1,28 @@
+server:
+  port: 8888
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tyut2020?useUnicode=true&serverTimezone=Asia/Shanghai&useSSL=false&characterEncoding=utf8
+    username: root
+    password: 1005
+    type: com.alibaba.druid.pool.DruidDataSource
+
+mybatis:
+  mapper-locations: classpath:com/neuedu/mapper/*.xml
+
+pagehelper:
+  helperDialect: mysql
+
+pageSize: 6
+
+logging:
+  level:
+    com:
+      neuedu:
+        mapper: debug
+
+
+
+

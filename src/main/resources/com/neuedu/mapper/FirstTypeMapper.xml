@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.mapper.FirstTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.entity.FirstType" >
+    <id column="firstTypeId" property="firsttypeid" jdbcType="BIGINT" />
+    <result column="firstTypeName" property="firsttypename" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    firstTypeId, firstTypeName, status, createTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from first_type
+    where firstTypeId = #{firsttypeid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from first_type
+    where firstTypeId = #{firsttypeid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.entity.FirstType" >
+    insert into first_type (firstTypeId, firstTypeName, status, 
+      createTime)
+    values (#{firsttypeid,jdbcType=BIGINT}, #{firsttypename,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.entity.FirstType" >
+    insert into first_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="firsttypeid != null" >
+        firstTypeId,
+      </if>
+      <if test="firsttypename != null" >
+        firstTypeName,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="firsttypeid != null" >
+        #{firsttypeid,jdbcType=BIGINT},
+      </if>
+      <if test="firsttypename != null" >
+        #{firsttypename,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.entity.FirstType" >
+    update first_type
+    <set >
+      <if test="firsttypename != null" >
+        firstTypeName = #{firsttypename,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where firstTypeId = #{firsttypeid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.entity.FirstType" >
+    update first_type
+    set firstTypeName = #{firsttypename,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where firstTypeId = #{firsttypeid,jdbcType=BIGINT}
+  </update>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from first_type
+  </select>
+
+</mapper>

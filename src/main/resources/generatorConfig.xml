@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+
+<generatorConfiguration>
+
+    <!-- (1)加载属性文件 -->
+    <properties resource="jdbc-config.properties"/>
+
+    <!-- (2)指定MySQL的JDBC驱动jar包的位置 -->
+    <classPathEntry location="${mysql.driver.location}"/>
+
+    <context id="context" targetRuntime="MyBatis3">
+
+        <!-- 配置是否生成注释信息 suppressAllComments为true表示不生成注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- (3)配置数据库的连接信息 -->
+        <jdbcConnection driverClass="${jdbc.driverClassName}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}"/>
+
+        <!-- 配置类型解析器
+           value属性默认为false，将JDBC的DECIMAL和NUMERIC类型解析为java.lang.Integer类型
+           否则会解析为java.math.BigDecimal类型 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- (4)配置Java实体类的生成位置 -->
+        <javaModelGenerator targetPackage="com.neuedu.entity"
+                            targetProject="src/main/java">
+        </javaModelGenerator>
+
+        <!-- (5)配置SQL映射文件的生成位置 -->
+        <sqlMapGenerator targetPackage="com.neuedu.mapper"
+                         targetProject="src/main/resources">
+        </sqlMapGenerator>
+
+        <!-- (6)配置Mapper接口的生成位置 -->
+        <javaClientGenerator targetPackage="com.neuedu.mapper"
+                             type="XMLMAPPER"
+                             targetProject="src/main/java">
+        </javaClientGenerator>
+
+        <!-- (7)指定根据哪些数据表生成代码 enableXXXByExample表示是否生成QBE风格的查询类 -->
+<!--            <table tableName="address"
+                   enableCountByExample="false" enableDeleteByExample="false"
+                   enableSelectByExample="false" enableUpdateByExample="false"/>
+             <table tableName="cart"
+                   enableCountByExample="false" enableDeleteByExample="false"
+                   enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="comment"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="first_type"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="goods"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="goods_tag"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="order"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="order_goods"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="second_type"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="store"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="user"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="user_goods"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+<!--        <table tableName="user_store"-->
+<!--               enableCountByExample="false" enableDeleteByExample="false"-->
+<!--               enableSelectByExample="false" enableUpdateByExample="false"/>-->
+    </context>
+
+</generatorConfiguration>

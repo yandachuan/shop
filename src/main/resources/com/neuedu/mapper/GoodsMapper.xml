@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.mapper.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.entity.Goods" >
+    <id column="goodsId" property="goodsid" jdbcType="BIGINT" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="goodsName" property="goodsname" jdbcType="VARCHAR" />
+    <result column="monthlySales" property="monthlysales" jdbcType="INTEGER" />
+    <result column="inventory" property="inventory" jdbcType="INTEGER" />
+    <result column="imag0" property="imag0" jdbcType="VARCHAR" />
+    <result column="imag1" property="imag1" jdbcType="VARCHAR" />
+    <result column="imag2" property="imag2" jdbcType="VARCHAR" />
+    <result column="details" property="details" jdbcType="VARCHAR" />
+    <result column="firstTypeId" property="firsttypeid" jdbcType="BIGINT" />
+    <result column="secondTypeId" property="secondtypeid" jdbcType="BIGINT" />
+    <result column="storeId" property="storeid" jdbcType="BIGINT" />
+    <result column="discount" property="discount" jdbcType="INTEGER" />
+    <result column="originAddress" property="originaddress" jdbcType="VARCHAR" />
+    <result column="freight" property="freight" jdbcType="INTEGER" />
+    <result column="collectionNum" property="collectionnum" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goodsId, price, goodsName, monthlySales, inventory, imag0, imag1, imag2, details, 
+    firstTypeId, secondTypeId, storeId, discount, originAddress, freight, collectionNum, 
+    status, createTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where goodsId = #{goodsid,jdbcType=BIGINT} and status = 1
+  </select>
+
+  <insert id="insert" parameterType="com.neuedu.entity.Goods" >
+    insert into goods (goodsId, price, goodsName, 
+      monthlySales, inventory, imag0, 
+      imag1, imag2, details, 
+      firstTypeId, secondTypeId, storeId, 
+      discount, originAddress, freight, 
+      collectionNum, status, createTime
+      )
+    values (#{goodsid,jdbcType=BIGINT}, #{price,jdbcType=DOUBLE}, #{goodsname,jdbcType=VARCHAR}, 
+      #{monthlysales,jdbcType=INTEGER}, #{inventory,jdbcType=INTEGER}, #{imag0,jdbcType=VARCHAR}, 
+      #{imag1,jdbcType=VARCHAR}, #{imag2,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR}, 
+      #{firsttypeid,jdbcType=BIGINT}, #{secondtypeid,jdbcType=BIGINT}, #{storeid,jdbcType=BIGINT}, 
+      #{discount,jdbcType=INTEGER}, #{originaddress,jdbcType=VARCHAR}, #{freight,jdbcType=INTEGER}, 
+      #{collectionnum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.entity.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsid != null" >
+        goodsId,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="goodsname != null" >
+        goodsName,
+      </if>
+      <if test="monthlysales != null" >
+        monthlySales,
+      </if>
+      <if test="inventory != null" >
+        inventory,
+      </if>
+      <if test="imag0 != null" >
+        imag0,
+      </if>
+      <if test="imag1 != null" >
+        imag1,
+      </if>
+      <if test="imag2 != null" >
+        imag2,
+      </if>
+      <if test="details != null" >
+        details,
+      </if>
+      <if test="firsttypeid != null" >
+        firstTypeId,
+      </if>
+      <if test="secondtypeid != null" >
+        secondTypeId,
+      </if>
+      <if test="storeid != null" >
+        storeId,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="originaddress != null" >
+        originAddress,
+      </if>
+      <if test="freight != null" >
+        freight,
+      </if>
+      <if test="collectionnum != null" >
+        collectionNum,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=BIGINT},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsname != null" >
+        #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlysales != null" >
+        #{monthlysales,jdbcType=INTEGER},
+      </if>
+      <if test="inventory != null" >
+        #{inventory,jdbcType=INTEGER},
+      </if>
+      <if test="imag0 != null" >
+        #{imag0,jdbcType=VARCHAR},
+      </if>
+      <if test="imag1 != null" >
+        #{imag1,jdbcType=VARCHAR},
+      </if>
+      <if test="imag2 != null" >
+        #{imag2,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="firsttypeid != null" >
+        #{firsttypeid,jdbcType=BIGINT},
+      </if>
+      <if test="secondtypeid != null" >
+        #{secondtypeid,jdbcType=BIGINT},
+      </if>
+      <if test="storeid != null" >
+        #{storeid,jdbcType=BIGINT},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="originaddress != null" >
+        #{originaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="freight != null" >
+        #{freight,jdbcType=INTEGER},
+      </if>
+      <if test="collectionnum != null" >
+        #{collectionnum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.entity.Goods" >
+    update goods
+    <set >
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsname != null" >
+        goodsName = #{goodsname,jdbcType=VARCHAR},
+      </if>
+      <if test="monthlysales != null" >
+        monthlySales = #{monthlysales,jdbcType=INTEGER},
+      </if>
+      <if test="inventory != null" >
+        inventory = #{inventory,jdbcType=INTEGER},
+      </if>
+      <if test="imag0 != null" >
+        imag0 = #{imag0,jdbcType=VARCHAR},
+      </if>
+      <if test="imag1 != null" >
+        imag1 = #{imag1,jdbcType=VARCHAR},
+      </if>
+      <if test="imag2 != null" >
+        imag2 = #{imag2,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+      <if test="firsttypeid != null" >
+        firstTypeId = #{firsttypeid,jdbcType=BIGINT},
+      </if>
+      <if test="secondtypeid != null" >
+        secondTypeId = #{secondtypeid,jdbcType=BIGINT},
+      </if>
+      <if test="storeid != null" >
+        storeId = #{storeid,jdbcType=BIGINT},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=INTEGER},
+      </if>
+      <if test="originaddress != null" >
+        originAddress = #{originaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="freight != null" >
+        freight = #{freight,jdbcType=INTEGER},
+      </if>
+      <if test="collectionnum != null" >
+        collectionNum = #{collectionnum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where goodsId = #{goodsid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.entity.Goods" >
+    update goods
+    set price = #{price,jdbcType=DOUBLE},
+      goodsName = #{goodsname,jdbcType=VARCHAR},
+      monthlySales = #{monthlysales,jdbcType=INTEGER},
+      inventory = #{inventory,jdbcType=INTEGER},
+      imag0 = #{imag0,jdbcType=VARCHAR},
+      imag1 = #{imag1,jdbcType=VARCHAR},
+      imag2 = #{imag2,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR},
+      firstTypeId = #{firsttypeid,jdbcType=BIGINT},
+      secondTypeId = #{secondtypeid,jdbcType=BIGINT},
+      storeId = #{storeid,jdbcType=BIGINT},
+      discount = #{discount,jdbcType=INTEGER},
+      originAddress = #{originaddress,jdbcType=VARCHAR},
+      freight = #{freight,jdbcType=INTEGER},
+      collectionNum = #{collectionnum,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where goodsId = #{goodsid,jdbcType=BIGINT}
+  </update>
+
+  <select id="findRecommend" resultMap="BaseResultMap" parameterType="long[]">
+    select * from goods where goodsid in
+    <foreach collection="array" item="goodsId" open="(" separator="," close=")">
+      #{goodsId}
+    </foreach>
+    and status = 1
+  </select>
+
+  <select id="findSellMore" resultMap="BaseResultMap">
+    select * from goods where status = 1 order by monthlySales desc
+  </select>
+
+  <update id="OffGoods" parameterType="java.lang.Long" >
+    update goods set status = 0
+    where goodsId = #{goodsid,jdbcType=BIGINT}
+  </update>
+
+  <select id="findByTypeOne" resultMap="BaseResultMap" parameterType="int">
+    select * from goods where firstTypeId = #{firstTypeId} and status = 1
+  </select>
+
+  <select id="findByTypeTwo" resultMap="BaseResultMap" parameterType="int">
+    select * from goods where secondTypeId = #{secondTypeId} and status = 1
+  </select>
+
+  <select id="findByName" resultMap="BaseResultMap" parameterType="string">
+    select * from goods where goodsName like concat('%',#{goodsName},'%') and status = 1
+  </select>
+
+  <select id="findGoods" resultMap="BaseResultMap">
+    select *
+    from goods
+    <where>
+      <if test="firstTypeId != 0">
+        and firstTypeId = #{firstTypeId}
+      </if>
+      <if test="secondTypeId != 0">
+        and secondTypeId = #{secondTypeId}
+      </if>
+      <if test="goodsName != null">
+        and goodsName like concat('%', #{goodsName},'%')
+      </if>
+      <if test="minPrice != 0">
+        and price &gt;= #{minPrice}
+      </if>
+      <if test="maxPrice != 0">
+        and price &lt;= #{maxPrice}
+      </if>
+      <if test="storeId != 0">
+        storeid = #{storeId}
+      </if>
+      <if test="storeId == 0">
+        and status = 1
+      </if>
+    </where>
+  </select>
+
+  <select id="findGoodsBack" resultMap="BaseResultMap">
+    select *
+    from goods
+    <where>
+      <if test="firstTypeId != 0">
+        and firstTypeId = #{firstTypeId}
+      </if>
+      <if test="secondTypeId != 0">
+        and secondTypeId = #{secondTypeId}
+      </if>
+      <if test="goodsName != null">
+        and goodsName like concat('%', #{goodsName},'%')
+      </if>
+      <if test="minPrice != 0">
+        and price &gt;= #{minPrice}
+      </if>
+      <if test="maxPrice != 0">
+        and price &lt;= #{maxPrice}
+      </if>
+      <if test="storeId != 0">
+        storeid = #{storeId}
+      </if>
+    </where>
+  </select>
+
+  <select id="findByStoreId" resultMap="BaseResultMap" parameterType="long">
+    select * from goods where storeId = #{storeid}
+  </select>
+
+</mapper>

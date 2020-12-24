@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.mapper.CartMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.entity.Cart" >
+    <id column="cartId" property="cartid" jdbcType="BIGINT" />
+    <result column="userId" property="userid" jdbcType="BIGINT" />
+    <result column="goodsId" property="goodsid" jdbcType="BIGINT" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="isChecked" property="ischecked" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cartId, userId, goodsId, quantity, isChecked
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where cartId = #{cartid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from cart
+    where cartId = #{cartid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.entity.Cart" >
+    insert into cart (cartId, userId, goodsId, 
+      quantity, isChecked)
+    values (#{cartid,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{goodsid,jdbcType=BIGINT}, 
+      #{quantity,jdbcType=INTEGER}, #{ischecked,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.entity.Cart" >
+    insert into cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cartid != null" >
+        cartId,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="goodsid != null" >
+        goodsId,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="ischecked != null" >
+        isChecked,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cartid != null" >
+        #{cartid,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=BIGINT},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="ischecked != null" >
+        #{ischecked,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.entity.Cart" >
+    update cart
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="goodsid != null" >
+        goodsId = #{goodsid,jdbcType=BIGINT},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="ischecked != null" >
+        isChecked = #{ischecked,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cartId = #{cartid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.entity.Cart" >
+    update cart
+    set userId = #{userid,jdbcType=BIGINT},
+      goodsId = #{goodsid,jdbcType=BIGINT},
+      quantity = #{quantity,jdbcType=INTEGER},
+      isChecked = #{ischecked,jdbcType=INTEGER}
+    where cartId = #{cartid,jdbcType=BIGINT}
+  </update>
+
+
+
+
+
+  <select id="findCartQuantity" parameterType="Long" resultType="int">
+    select count(*) from cart where userId = #{userid}
+  </select>
+
+  <select id="findCart" resultMap="BaseResultMap">
+    select * from cart where userId = #{userid} and goodsid = #{goodsid}
+  </select>
+
+  <select id="findCartList" resultMap="BaseResultMap" parameterType="Long">
+    select * from cart where userId = #{userid}
+  </select>
+
+  <select id="findCheckedList" resultMap="BaseResultMap" parameterType="Long">
+    select * from cart where userId = #{userid} AND isChecked = 1
+  </select>
+
+
+  <delete id="deleteCartBatch" parameterType="Long[]">
+    delete from cart where cartId in
+    <foreach collection="array" item="cartId" open="(" close=")" separator=",">
+      #{cartId}
+    </foreach>
+  </delete>
+
+  <delete id="clearCart" parameterType="Long">
+     delete from cart where userId = #{userid}
+  </delete>
+
+  <delete id="deleteCheckedCart" parameterType="Long">
+        delete from cart where userId = #{userid} and isChecked = 1
+  </delete>
+
+  <update id="updateCart">
+    update cart
+    <set>
+      <if test="operationType==1">
+        quantity = quantity + 1
+      </if>
+      <if test="operationType==2">
+        quantity = quantity - 1
+      </if>
+
+      <if test="operationType==3">
+        isChecked = 1 - isChecked
+      </if>
+
+    </set>
+
+    where cartId = #{cartid}
+  </update>
+
+  <update id="checkAll">
+    update cart
+    <set>
+      <if test="checkAllFlag==true">
+        isChecked = 1
+      </if>
+
+      <if test="checkAllFlag==false">
+        isChecked = 0
+      </if>
+    </set>
+
+    where userId = #{userid}
+  </update>
+</mapper>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.mapper.GoodsTagMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.entity.GoodsTag" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="goodsId" property="goodsid" jdbcType="BIGINT" />
+    <result column="tag0" property="tag0" jdbcType="VARCHAR" />
+    <result column="tag1" property="tag1" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="inventory" property="inventory" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, goodsId, tag0, tag1, price, inventory, createTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods_tag
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from goods_tag
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.neuedu.entity.GoodsTag" >
+    insert into goods_tag (id, goodsId, tag0, 
+      tag1, price, inventory, 
+      createTime)
+    values (#{id,jdbcType=BIGINT}, #{goodsid,jdbcType=BIGINT}, #{tag0,jdbcType=VARCHAR}, 
+      #{tag1,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{inventory,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.entity.GoodsTag" >
+    insert into goods_tag
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="goodsid != null" >
+        goodsId,
+      </if>
+      <if test="tag0 != null" >
+        tag0,
+      </if>
+      <if test="tag1 != null" >
+        tag1,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="inventory != null" >
+        inventory,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="goodsid != null" >
+        #{goodsid,jdbcType=BIGINT},
+      </if>
+      <if test="tag0 != null" >
+        #{tag0,jdbcType=VARCHAR},
+      </if>
+      <if test="tag1 != null" >
+        #{tag1,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="inventory != null" >
+        #{inventory,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.entity.GoodsTag" >
+    update goods_tag
+    <set >
+      <if test="goodsid != null" >
+        goodsId = #{goodsid,jdbcType=BIGINT},
+      </if>
+      <if test="tag0 != null" >
+        tag0 = #{tag0,jdbcType=VARCHAR},
+      </if>
+      <if test="tag1 != null" >
+        tag1 = #{tag1,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="inventory != null" >
+        inventory = #{inventory,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.entity.GoodsTag" >
+    update goods_tag
+    set goodsId = #{goodsid,jdbcType=BIGINT},
+      tag0 = #{tag0,jdbcType=VARCHAR},
+      tag1 = #{tag1,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      inventory = #{inventory,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <delete id="deleteByGoodsId" parameterType="long">
+    delete from goods_tag
+    where goodsId = #{goodsId}
+  </delete>
+
+  <select id="findByGoodsId" parameterType="long" resultMap="BaseResultMap">
+    select *
+    from goods_tag
+    where goodsId = #{goodsId}
+  </select>
+
+</mapper>

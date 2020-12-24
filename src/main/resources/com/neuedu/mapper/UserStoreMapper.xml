@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neuedu.mapper.UserStoreMapper" >
+  <resultMap id="BaseResultMap" type="com.neuedu.entity.UserStore" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="userId" property="userid" jdbcType="BIGINT" />
+    <result column="storeId" property="storeid" jdbcType="BIGINT" />
+    <result column="headPortrait" property="headportrait" jdbcType="VARCHAR" />
+    <result column="storeName" property="storename" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userId, storeId, headPortrait, storeName, createTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_store
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_store
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.neuedu.entity.UserStore" >
+    insert into user_store (id, userId, storeId, 
+      headPortrait, storeName, createTime
+      )
+    values (#{id,jdbcType=BIGINT}, #{userid,jdbcType=BIGINT}, #{storeid,jdbcType=BIGINT}, 
+      #{headportrait,jdbcType=VARCHAR}, #{storename,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.neuedu.entity.UserStore" >
+    insert into user_store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="storeid != null" >
+        storeId,
+      </if>
+      <if test="headportrait != null" >
+        headPortrait,
+      </if>
+      <if test="storename != null" >
+        storeName,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="storeid != null" >
+        #{storeid,jdbcType=BIGINT},
+      </if>
+      <if test="headportrait != null" >
+        #{headportrait,jdbcType=VARCHAR},
+      </if>
+      <if test="storename != null" >
+        #{storename,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neuedu.entity.UserStore" >
+    update user_store
+    <set >
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="storeid != null" >
+        storeId = #{storeid,jdbcType=BIGINT},
+      </if>
+      <if test="headportrait != null" >
+        headPortrait = #{headportrait,jdbcType=VARCHAR},
+      </if>
+      <if test="storename != null" >
+        storeName = #{storename,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.neuedu.entity.UserStore" >
+    update user_store
+    set userId = #{userid,jdbcType=BIGINT},
+      storeId = #{storeid,jdbcType=BIGINT},
+      headPortrait = #{headportrait,jdbcType=VARCHAR},
+      storeName = #{storename,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+<!-- 根据userid和storeid删除记录 -->
+  <delete id="deleteRecord">
+    delete from user_store where userId =#{userid} and storeId=#{storeid}
+  </delete>
+
+  <select id="selectBySidAndUid" resultType="int">
+    select count(*) from user_store where userId =#{userid} and storeId=#{storeid}
+  </select>
+
+  <select id="selectStoreList" resultMap="BaseResultMap">
+    select * from user_store where userId =#{userid}
+  </select>
+</mapper>
